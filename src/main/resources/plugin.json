@@ -1,6 +1,7 @@
 {
-  "entrance": "org.allaymc.javaplugintemplate.JavaPluginTemplate",
-  "name": "JavaPluginTemplate",
-  "authors": ["mdx"],
-  "version": "1.0.0"
+  "entrance": "org.allaymc.papi.PlaceholderAPI",
+  "name": "PlaceholderAPI",
+  "description": "The official placeholder api for Allay",
+  "authors": ["daoge_cmd"],
+  "version": "0.0.1"
 }
