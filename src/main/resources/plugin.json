@@ -1,0 +1,6 @@
+{
+  "entrance": "org.allaymc.javaplugintemplate.JavaPluginTemplate",
+  "name": "JavaPluginTemplate",
+  "authors": ["mdx"],
+  "version": "1.0.0"
+}
