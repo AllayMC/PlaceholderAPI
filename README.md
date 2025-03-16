@@ -54,4 +54,4 @@ For a deeper dive into the Allay API and its functionalities, please refer to ou
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the LGPL v3 License - see the [LICENSE](LICENSE) file for details.
