@@ -1,56 +1,72 @@
-# Allay Java Plugin Template
+# PlaceholderAPI
 
-Welcome to the java plugin template for allay.
+The official placeholder api for Allay, inspired by the famous PAPI plugin for Spigot.
 
-## Prerequisites
+> [!NOTE]
+> This plugin is still under development and has not been released. If you are interested in using this plugin,
+> please check out the latest build from our GitHub Actions
+> page: [Build Artifacts](https://github.com/AllayMC/PlaceholderAPI/actions/workflows/gradle.yml).
 
-- Java21 or higher.
-- Allay installed.
+## Install
 
-## Getting Started
+- Download .jar file from [release](https://github.com/AllayMC/PlaceholderAPI/releases) or [action](https://github.com/AllayMC/PlaceholderAPI/actions/workflows/gradle.yml)
+- Put it into `plugins` folder
+- Restart the server, enjoy!
 
-1. **Clone this Repository**
+## Usages
 
-```bash
-git clone https://github.com/AllayMC/JavaPluginTemplate.git
-```
-   
-2. **Navigate to the Cloned Directory**
-
-```bash
-cd JavaPluginTemplate
-```
-   
-3. **Change Plugin Information**
-
-- Rename package name from `org.allaymc.javaplugintemplate` to `your.group.name.and.pluginname`
-- Edit [build.gradle.kts](build.gradle.kts) and [settings.gradle.kts](settings.gradle.kts)
-- Edit [plugin.json](src/main/resources/plugin.json)
-- Reload gradle
-   
-4. **Build and Run Your Plugin**
-
-```bash
-gradlew shadowJar
-```
-   
-This command will produce a `.jar` file in the `build/libs` directory. 
-Copy the `.jar` file to the `plugins` directory of your allay server.
-Start the allay server and check the logs to ensure your plugin loads and operates
-as expected.
-
-5. **Test Your Plugin in Gradle**
-
-```bash
-gradlew runServer
+```java
+@EventHandler
+public void onPlayerJoin(PlayerJoinEvent event) {
+    var joinText = "{player_name} joined the server! His game mode is {game_type}";
+    joinText = PlaceholderAPI.getAPI().setPlaceholder(event.getPlayer(), joinText);
+    Server.getInstance().broadcastText(joinText);
+}
 ```
 
-This command will start an allay server with your plugin loaded.
-Then close allay server by clicking `X` in the dashboard window.
+## Built-in Placeholders
 
-## Documentation
+There are a number of built-in placeholders that can be used once papi is installed:
 
-For a deeper dive into the Allay API and its functionalities, please refer to our [documentation](https://docs.allaymc.org) (WIP).
+- [x] `{x}` x coordinate
+- [x] `{y}` y coordinate
+- [x] `{z}` z coordinate
+- [x] `{player_name}` player's name
+- [x] `{dimension}` dimension name
+- [x] `{dimension_id}` dimension id
+- [x] `{ping}` player ping
+- [x] `{date}` date
+- [x] `{time}` time
+- [x] `{datetime}` date and time
+- [x] `{year}` year
+- [x] `{month}` month
+- [x] `{day}` day
+- [x] `{hour}` hour
+- [x] `{minute}` minute
+- [x] `{second}` second
+- [x] `{mc_version}` minecraft version
+- [x] `{online}` online player count
+- [x] `{max_online}` max online player count
+- [x] `{address}` player's address
+- [x] `{runtime_id}` player's runtime id
+- [x] `{exp_level}` player's experience level
+- [x] `{exp_progress}` player's experience progress
+- [x] `{game_type}` player's game mode
+- [x] `{xuid}` player's xuid
+- [x] `{uuid}` player's uuid
+- [x] `{device_os}` os name of player's current device
+- [x] `{locale}` player's locale
+
+## Requirement
+
+Java: 21+
+
+Allay: 0.2.1+
+
+## Contributing
+
+Contributions are welcome! Feel free to fork the repository, improve the code, and submit pull requests with your
+changes.
 
 ## License
 
