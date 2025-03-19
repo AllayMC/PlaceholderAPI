@@ -7,7 +7,7 @@ plugins {
 
 group = "org.allaymc.papi"
 description = "The official placeholder api for Allay"
-version = "0.0.1"
+version = "0.1.0"
 
 java {
     toolchain {
