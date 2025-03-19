@@ -18,9 +18,9 @@ The official placeholder api for Allay, inspired by the famous PAPI plugin for S
 ```java
 @EventHandler
 public void onPlayerJoin(PlayerJoinEvent event) {
-    var joinText = "{player_name} joined the server! His game mode is {game_type}";
-    joinText = PlaceholderAPI.getAPI().setPlaceholder(event.getPlayer(), joinText);
-    Server.getInstance().broadcastText(joinText);
+    var joinMessage = "{player_name} joined the server! His game mode is {game_type}";
+    joinMessage = PlaceholderAPI.getAPI().setPlaceholder(event.getPlayer(), joinMessage);
+    event.setJoinMessage(joinMessage);
 }
 ```
 
