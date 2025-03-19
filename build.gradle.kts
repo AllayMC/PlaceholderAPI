@@ -31,6 +31,54 @@ dependencies {
     annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.34")
 }
 
+publishing {
+    repositories {
+        // Jitpack requires us to publish artifacts to local maven repo
+        mavenLocal()
+    }
+
+    java {
+        withSourcesJar()
+    }
+
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+
+            pom {
+                inceptionYear.set("2025")
+                packaging = "jar"
+                url.set("https://github.com/AllayMC/PlaceholderAPI")
+
+                scm {
+                    connection.set("scm:git:git://github.com/AllayMC/PlaceholderAPI.git")
+                    developerConnection.set("scm:git:ssh://github.com/AllayMC/PlaceholderAPI.git")
+                    url.set("https://github.com/AllayMC/PlaceholderAPI")
+                }
+
+                licenses {
+                    license {
+                        name.set("LGPL 3.0")
+                        url.set("https://www.gnu.org/licenses/lgpl-3.0.en.html")
+                    }
+                }
+
+                developers {
+                    developer {
+                        name.set("AllayMC Team")
+                        organization.set("AllayMC")
+                        organizationUrl.set("https://github.com/AllayMC")
+                    }
+                }
+            }
+        }
+    }
+}
+
 tasks.shadowJar {
     archiveClassifier = "shaded"
 }
