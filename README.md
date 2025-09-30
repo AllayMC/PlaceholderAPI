@@ -1,5 +1,7 @@
 # PlaceholderAPI
 
+![Maven Central Version](https://img.shields.io/maven-central/v/org.allaymc/papi?label=papi)
+
 The official placeholder api for Allay, inspired by the famous PAPI plugin for Spigot.
 
 > [!NOTE]
