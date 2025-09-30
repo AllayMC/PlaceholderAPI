@@ -10,10 +10,10 @@ public interface PlaceholderProcessor {
     /**
      * Process the placeholder.
      *
-     * @param player the player used to process the placeholder, can be {@code null}.
-     * @param params the params used to process the placeholder, can be {@code null}.
+     * @param player the player used to process the placeholder, can be {@code null}
+     * @param params the params used to process the placeholder, can be {@code null}
      *
-     * @return the processed placeholder.
+     * @return the processed placeholder
      */
     String process(EntityPlayer player, String params);
 }

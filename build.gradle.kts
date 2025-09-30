@@ -1,86 +1,90 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.vanniktech.maven.publish.MavenPublishBaseExtension
 
 plugins {
     id("java-library")
-    id("maven-publish")
+    id("com.vanniktech.maven.publish") version "0.34.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
-group = "org.allaymc.papi"
-description = "The official placeholder api for Allay"
-version = "0.1.0"
+group = "org.allaymc"
+version = "0.1.0-SNAPSHOT"
+
+tasks {
+    withType<JavaCompile> {
+        options.encoding = "UTF-8"
+        configureEach {
+            options.isFork = true
+        }
+    }
+
+    // We already have sources jar, so no need to build Javadoc, which would cause a lot of warnings
+    withType<Javadoc> {
+        enabled = false
+    }
+
+    withType<Copy> {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    withType<ShadowJar> {
+        archiveClassifier = "shaded"
+    }
+}
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+    withSourcesJar()
 }
 
 repositories {
     mavenCentral()
-    maven("https://jitpack.io/")
-    maven("https://repo.opencollab.dev/maven-releases/")
-    maven("https://repo.opencollab.dev/maven-snapshots/")
-    maven("https://storehouse.okaeri.eu/repository/maven-public/")
+    // TODO: remove snapshot repo once allay released 0.12.0
+    maven("https://central.sonatype.com/repository/maven-snapshots/")
 }
 
 dependencies {
-    compileOnly(group = "org.allaymc.allay", name = "api", version = "master-SNAPSHOT")
+    compileOnly(group = "org.allaymc.allay", name = "api", version = "0.12.0-SNAPSHOT")
     compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.34")
 
     annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.34")
 }
 
-publishing {
-    repositories {
-        // Jitpack requires us to publish artifacts to local maven repo
-        mavenLocal()
-    }
+configure<MavenPublishBaseExtension> {
+    publishToMavenCentral()
+    signAllPublications()
 
-    java {
-        withSourcesJar()
-    }
+    coordinates(project.group.toString(), project.name, project.version.toString())
 
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
+    pom {
+        name.set(project.name)
+        description.set("The official placeholder api for Allay")
+        inceptionYear.set("2025")
+        url.set("https://github.com/AllayMC/PlaceholderAPI")
 
-            groupId = project.group.toString()
-            artifactId = project.name
-            version = project.version.toString()
+        scm {
+            connection.set("scm:git:git://github.com/AllayMC/PlaceholderAPI.git")
+            developerConnection.set("scm:git:ssh://github.com/AllayMC/PlaceholderAPI.git")
+            url.set("https://github.com/AllayMC/PlaceholderAPI")
+        }
 
-            pom {
-                inceptionYear.set("2025")
-                packaging = "jar"
-                url.set("https://github.com/AllayMC/PlaceholderAPI")
+        licenses {
+            license {
+                name.set("LGPL 3.0")
+                url.set("https://www.gnu.org/licenses/lgpl-3.0.en.html")
+            }
+        }
 
-                scm {
-                    connection.set("scm:git:git://github.com/AllayMC/PlaceholderAPI.git")
-                    developerConnection.set("scm:git:ssh://github.com/AllayMC/PlaceholderAPI.git")
-                    url.set("https://github.com/AllayMC/PlaceholderAPI")
-                }
-
-                licenses {
-                    license {
-                        name.set("LGPL 3.0")
-                        url.set("https://www.gnu.org/licenses/lgpl-3.0.en.html")
-                    }
-                }
-
-                developers {
-                    developer {
-                        name.set("AllayMC Team")
-                        organization.set("AllayMC")
-                        organizationUrl.set("https://github.com/AllayMC")
-                    }
-                }
+        developers {
+            developer {
+                name.set("AllayMC Team")
+                organization.set("AllayMC")
+                organizationUrl.set("https://github.com/AllayMC")
             }
         }
     }
-}
-
-tasks.shadowJar {
-    archiveClassifier = "shaded"
 }
 
 tasks.register<JavaExec>("runServer") {

@@ -1,6 +1,6 @@
 package org.allaymc.papi;
 
-import org.allaymc.api.command.SimpleCommand;
+import org.allaymc.api.command.Command;
 import org.allaymc.api.command.tree.CommandTree;
 import org.allaymc.api.entity.interfaces.EntityPlayer;
 
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author daoge_cmd
  */
-public class PAPICommand extends SimpleCommand {
+public class PAPICommand extends Command {
     public PAPICommand() {
         super("papi", "PlaceholderAPI command");
     }

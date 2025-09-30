@@ -2,7 +2,6 @@ package org.allaymc.papi;
 
 import org.allaymc.api.entity.interfaces.EntityPlayer;
 
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
@@ -16,11 +15,11 @@ public class CharsReplacer {
     /**
      * Replace the placeholders in a given text.
      *
-     * @param text   the text to be processed.
-     * @param player the player used to process the text, can be {@code null}.
-     * @param lookup the lookup used to find processors for placeholders.
+     * @param text   the text to be processed
+     * @param player the player used to process the text, can be {@code null}
+     * @param lookup the lookup used to find processors for placeholders
      *
-     * @return the processed text.
+     * @return the processed text
      */
     public static String apply(String text, EntityPlayer player, Function<String, PlaceholderProcessor> lookup) {
         final char[] chars = text.toCharArray();

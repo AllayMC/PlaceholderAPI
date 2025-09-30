@@ -3,5 +3,6 @@
   "name": "PlaceholderAPI",
   "description": "The official placeholder api for Allay",
   "authors": ["daoge_cmd"],
-  "version": "0.1.0"
+  "version": "0.1.0-SNAPSHOT",
+  "api_version": "0.8.0+"
 }

@@ -1,33 +1,35 @@
-name: Build with Gradle
+name: Publish
 
 on:
   push:
     branches: [ "master" ]
     paths:
-      - .github/workflows/build.yml
+      - .github/workflows/gradle.yml
+      - gradle.properties
+      - build.gradle.kts
       - src/**
   pull_request:
     paths:
-      - .github/workflows/build.yml
+      - .github/workflows/gradle.yml
+      - gradle.properties
+      - build.gradle.kts
       - src/**
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      # Support for ipv6
-      - name: Set up WARP
-        uses: fscarmen/warp-on-actions@v1.1
-        if: contains(github.ref_name, 'master')
-        with:
-          stack: dual
-      - uses: actions/checkout@v4
-      - run: chmod +x gradlew
-      - uses: actions/setup-java@v4
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
         with:
           java-version: '21'
           distribution: 'zulu'
-      - name: Setup gradle
+
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
@@ -36,10 +38,17 @@ jobs:
           build-scan-publish: true
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
+
       - name: Build
-        run: ./gradlew build
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        if: success() && contains(github.ref_name, 'master')
-        with:
-          path: build/libs/*.jar
+        run: |
+          chmod +x gradlew
+          ./gradlew build
+
+      - name: Publish to Maven Central
+        if: success() && github.event_name == 'push' && github.repository == 'AllayMC/PlaceholderAPI' && contains(github.ref_name, 'master')
+        run: ./gradlew publishToMavenCentral
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SONATYPE_SECRET_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SONATYPE_SECRET_KEY_PASSWORD }}

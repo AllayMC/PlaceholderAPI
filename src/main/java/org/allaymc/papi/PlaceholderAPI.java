@@ -8,7 +8,6 @@ import org.allaymc.api.registry.Registries;
 import org.allaymc.api.server.Server;
 import org.jetbrains.annotations.UnmodifiableView;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -53,10 +52,10 @@ public class PlaceholderAPI extends Plugin {
      * Translate all placeholders into their corresponding values.
      * The pattern of a valid placeholder is {@code {<identifier>|<params>}}.
      *
-     * @param player player to parse the placeholders against.
-     * @param text text to set the placeholder values in.
+     * @param player player to parse the placeholders against
+     * @param text text to set the placeholder values in
      *
-     * @return string containing all translated placeholders.
+     * @return string containing all translated placeholders
      */
     public String setPlaceholders(EntityPlayer player, String text) {
         return CharsReplacer.apply(text, player, this.registry::get);
@@ -65,9 +64,9 @@ public class PlaceholderAPI extends Plugin {
     /**
      * Check if a specific placeholder identifier is currently registered.
      *
-     * @param identifier the identifier to check.
+     * @param identifier the identifier to check
      *
-     * @return {@code true} if identifier is already registered, {@code false} otherwise.
+     * @return {@code true} if identifier is already registered, {@code false} otherwise
      */
     public boolean isRegistered(String identifier) {
         return this.registry.containsKey(identifier);
@@ -76,7 +75,7 @@ public class PlaceholderAPI extends Plugin {
     /**
      * Get all registered placeholder identifiers.
      *
-     * @return A Set of type string containing the identifiers of all registered placeholders.
+     * @return A Set of type string containing the identifiers of all registered placeholders
      */
     @UnmodifiableView
     public Set<String> getRegisteredIdentifiers() {
@@ -86,7 +85,7 @@ public class PlaceholderAPI extends Plugin {
     /**
      * Get the placeholder pattern.
      *
-     * @return regex pattern of {@code [{]([^{}]+)[}]}.
+     * @return regex pattern of {@code [{]([^{}]+)[}]}
      */
     public Pattern getPlaceholderPattern() {
         return PLACEHOLDER_PATTERN;
@@ -95,9 +94,9 @@ public class PlaceholderAPI extends Plugin {
     /**
      * Check if a text contains any placeholders ({@code {<identifier>|<params>}}).
      *
-     * @param text text to check.
+     * @param text text to check
      *
-     * @return {@code true} if text contains any matches to the bracket placeholder pattern, {@code false} otherwise.
+     * @return {@code true} if text contains any matches to the bracket placeholder pattern, {@code false} otherwise
      */
     public boolean containsPlaceholders(String text) {
         return text != null && PLACEHOLDER_PATTERN.matcher(text).find();
@@ -106,11 +105,11 @@ public class PlaceholderAPI extends Plugin {
     /**
      * Attempt to register a placeholder.
      *
-     * @param plugin the plugin that is registering the placeholder.
-     * @param identifier the identifier of the placeholder.
-     * @param processor the processor that will process the placeholder.
+     * @param plugin the plugin that is registering the placeholder
+     * @param identifier the identifier of the placeholder
+     * @param processor the processor that will process the placeholder
      *
-     * @return {@code true} if the placeholder was successfully registered, {@code false} otherwise.
+     * @return {@code true} if the placeholder was successfully registered, {@code false} otherwise
      */
     public boolean registerPlaceholder(Plugin plugin, String identifier, PlaceholderProcessor processor) {
         if (isRegistered(identifier)) {
@@ -135,13 +134,13 @@ public class PlaceholderAPI extends Plugin {
         registerPlaceholder(this, "dimension_id", (player, params) -> String.valueOf(player.getLocation().dimension().getDimensionInfo().dimensionId()));
         registerPlaceholder(this, "ping", (player, params) -> String.valueOf(player.getPing()));
         registerPlaceholder(this, "mc_version", (player, params) -> player.getLoginData().getGameVersion());
-        registerPlaceholder(this, "online", (player, params) -> String.valueOf(Server.getInstance().getPlayerService().getPlayerCount()));
-        registerPlaceholder(this, "max_online", (player, params) -> String.valueOf(Server.getInstance().getPlayerService().getMaxPlayerCount()));
-        registerPlaceholder(this, "address", (player, params) -> player.getClientSession().getSocketAddress().toString());
+        registerPlaceholder(this, "online", (player, params) -> String.valueOf(Server.getInstance().getPlayerManager().getPlayerCount()));
+        registerPlaceholder(this, "max_online", (player, params) -> String.valueOf(Server.getInstance().getPlayerManager().getMaxPlayerCount()));
+        registerPlaceholder(this, "address", (player, params) -> player.getSocketAddress().toString());
         registerPlaceholder(this, "runtime_id", (player, params) -> String.valueOf(player.getRuntimeId()));
         registerPlaceholder(this, "exp_level", (player, params) -> String.valueOf(player.getExperienceLevel()));
         registerPlaceholder(this, "exp_progress", (player, params) -> String.valueOf(player.getExperienceProgress()));
-        registerPlaceholder(this, "game_type", (player, params) -> player.getGameType().toString().toLowerCase());
+        registerPlaceholder(this, "game_mode", (player, params) -> player.getGameMode().toString().toLowerCase());
         registerPlaceholder(this, "xuid", (player, params) -> player.getLoginData().getXuid());
         registerPlaceholder(this, "uuid", (player, params) -> player.getLoginData().getUuid().toString());
         registerPlaceholder(this, "device_os", (player, params) -> player.getLoginData().getDeviceInfo().device().getName());
