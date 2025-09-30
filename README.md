@@ -4,11 +4,6 @@
 
 The official placeholder api for Allay, inspired by the famous PAPI plugin for Spigot.
 
-> [!NOTE]
-> This plugin is still under development and has not been released. If you are interested in using this plugin,
-> please check out the latest build from our GitHub Actions
-> page: [Build Artifacts](https://github.com/AllayMC/PlaceholderAPI/actions/workflows/gradle.yml).
-
 ## Install
 
 - Download .jar file from [release](https://github.com/AllayMC/PlaceholderAPI/releases) or [action](https://github.com/AllayMC/PlaceholderAPI/actions/workflows/gradle.yml)

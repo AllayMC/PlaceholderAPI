@@ -4,7 +4,7 @@ import com.vanniktech.maven.publish.MavenPublishBaseExtension
 plugins {
     id("java-library")
     id("com.vanniktech.maven.publish") version "0.34.0"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "9.2.2"
 }
 
 group = "org.allaymc"
@@ -28,7 +28,7 @@ tasks {
     }
 
     withType<ShadowJar> {
-        archiveClassifier = "shaded"
+        archiveFileName = "${project.name}-${version}-shaded.jar"
     }
 }
 
@@ -47,9 +47,9 @@ repositories {
 
 dependencies {
     compileOnly(group = "org.allaymc.allay", name = "api", version = "0.12.0-SNAPSHOT")
-    compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.34")
+    compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.42")
 
-    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.34")
+    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.42")
 }
 
 configure<MavenPublishBaseExtension> {
