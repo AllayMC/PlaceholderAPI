@@ -15,11 +15,10 @@ The official placeholder api for Allay, inspired by the famous PAPI plugin for S
 ```kts
 repositories {
     mavenCentral()
-    maven("https://central.sonatype.com/repository/maven-snapshots/")
 }
 
 dependencies {
-    compileOnly(group = "org.allaymc", name = "papi", version = "0.1.0-SNAPSHOT")
+    compileOnly(group = "org.allaymc", name = "papi", version = "0.1.0")
 }
 ```
 
