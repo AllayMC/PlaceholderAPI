@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "org.allaymc"
-version = "0.1.0-SNAPSHOT"
+version = "0.1.0"
 
 tasks {
     withType<JavaCompile> {
@@ -41,12 +41,10 @@ java {
 
 repositories {
     mavenCentral()
-    // TODO: remove snapshot repo once allay released 0.12.0
-    maven("https://central.sonatype.com/repository/maven-snapshots/")
 }
 
 dependencies {
-    compileOnly(group = "org.allaymc.allay", name = "api", version = "0.12.0-SNAPSHOT")
+    compileOnly(group = "org.allaymc.allay", name = "api", version = "0.12.0")
     compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.42")
 
     annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.42")
