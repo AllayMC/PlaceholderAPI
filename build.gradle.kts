@@ -3,7 +3,7 @@ import com.vanniktech.maven.publish.MavenPublishBaseExtension
 
 plugins {
     id("java-library")
-    id("com.vanniktech.maven.publish") version "0.34.0"
+    id("com.vanniktech.maven.publish") version "0.35.0"
     id("com.gradleup.shadow") version "9.2.2"
 }
 
@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly(group = "org.allaymc.allay", name = "api", version = "0.12.0")
+    compileOnly(group = "org.allaymc.allay", name = "api", version = "0.16.0")
     compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.42")
 
     annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.42")
