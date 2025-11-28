@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class PAPICommand extends Command {
     public PAPICommand() {
-        super("papi", "PlaceholderAPI command");
+        super("papi", "PlaceholderAPI command", "papi.command");
     }
 
     @Override

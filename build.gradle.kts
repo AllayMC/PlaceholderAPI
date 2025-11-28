@@ -5,10 +5,23 @@ plugins {
     id("java-library")
     id("com.vanniktech.maven.publish") version "0.34.0"
     id("com.gradleup.shadow") version "9.2.2"
+    id("org.allaymc.gradle.plugin") version "0.1.2"
 }
 
 group = "org.allaymc"
-version = "0.1.0"
+version = "0.1.1"
+description = "The official placeholder api for Allay"
+
+allay {
+    api = "0.17.0"
+
+    plugin {
+        entrance = "org.allaymc.papi.PlaceholderAPI"
+        name = "PlaceholderAPI"
+        description = "The official placeholder api for Allay"
+        authors += "daoge_cmd"
+    }
+}
 
 tasks {
     withType<JavaCompile> {
@@ -44,7 +57,6 @@ repositories {
 }
 
 dependencies {
-    compileOnly(group = "org.allaymc.allay", name = "api", version = "0.12.0")
     compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.42")
 
     annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.42")
@@ -83,23 +95,4 @@ configure<MavenPublishBaseExtension> {
             }
         }
     }
-}
-
-tasks.register<JavaExec>("runServer") {
-    outputs.upToDateWhen { false }
-    dependsOn("shadowJar")
-
-    val shadowJar = tasks.named("shadowJar", ShadowJar::class).get()
-    val pluginJar = shadowJar.archiveFile.get().asFile
-    val cwd = layout.buildDirectory.file("run").get().asFile
-    val pluginsDir = cwd.resolve("plugins").apply { mkdirs() }
-    doFirst { pluginJar.copyTo(File(pluginsDir, pluginJar.name), overwrite = true) }
-
-    val group = "org.allaymc.allay"
-    val allays = configurations.compileOnly.get().dependencies.filter { it.group == group }
-    val dependency = allays.find { it.name == "server" } ?: allays.find { it.name == "api" }!!
-    val server = dependencies.create("$group:server:${dependency.version}")
-    classpath = files(configurations.detachedConfiguration(server).resolve())
-    mainClass = "org.allaymc.server.Allay"
-    workingDir = cwd
 }

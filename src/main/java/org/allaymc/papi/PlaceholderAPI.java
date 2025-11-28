@@ -128,23 +128,23 @@ public class PlaceholderAPI extends Plugin {
         registerPlaceholder(this, "x", (player, params) -> String.valueOf(Math.floor(player.getLocation().x())));
         registerPlaceholder(this, "y", (player, params) -> String.valueOf(Math.floor(player.getLocation().y())));
         registerPlaceholder(this, "z", (player, params) -> String.valueOf(Math.floor(player.getLocation().z())));
-        registerPlaceholder(this, "player_name", (player, params) -> player.getOriginName());
+        registerPlaceholder(this, "player_name", checkActualPlayer((player, params) -> player.getController().getOriginName()));
         registerPlaceholder(this, "player_display_name", (player, params) -> player.getDisplayName());
         registerPlaceholder(this, "dimension", (player, params) -> player.getLocation().dimension().getDimensionInfo().toString());
         registerPlaceholder(this, "dimension_id", (player, params) -> String.valueOf(player.getLocation().dimension().getDimensionInfo().dimensionId()));
-        registerPlaceholder(this, "ping", (player, params) -> String.valueOf(player.getPing()));
-        registerPlaceholder(this, "mc_version", (player, params) -> player.getLoginData().getGameVersion());
+        registerPlaceholder(this, "ping", checkActualPlayer((player, params) -> String.valueOf(player.getController().getPing())));
+        registerPlaceholder(this, "mc_version", checkActualPlayer((player, params) -> player.getController().getLoginData().getGameVersion()));
         registerPlaceholder(this, "online", (player, params) -> String.valueOf(Server.getInstance().getPlayerManager().getPlayerCount()));
         registerPlaceholder(this, "max_online", (player, params) -> String.valueOf(Server.getInstance().getPlayerManager().getMaxPlayerCount()));
-        registerPlaceholder(this, "address", (player, params) -> player.getSocketAddress().toString());
+        registerPlaceholder(this, "address", checkActualPlayer((player, params) -> player.getController().getSocketAddress().toString()));
         registerPlaceholder(this, "runtime_id", (player, params) -> String.valueOf(player.getRuntimeId()));
         registerPlaceholder(this, "exp_level", (player, params) -> String.valueOf(player.getExperienceLevel()));
         registerPlaceholder(this, "exp_progress", (player, params) -> String.valueOf(player.getExperienceProgress()));
         registerPlaceholder(this, "game_mode", (player, params) -> player.getGameMode().toString().toLowerCase());
-        registerPlaceholder(this, "xuid", (player, params) -> player.getLoginData().getXuid());
-        registerPlaceholder(this, "uuid", (player, params) -> player.getLoginData().getUuid().toString());
-        registerPlaceholder(this, "device_os", (player, params) -> player.getLoginData().getDeviceInfo().device().getName());
-        registerPlaceholder(this, "locale", (player, params) -> player.getLoginData().getLangCode().toString());
+        registerPlaceholder(this, "xuid", checkActualPlayer((player, params) -> player.getController().getLoginData().getXuid()));
+        registerPlaceholder(this, "uuid", checkActualPlayer((player, params) -> player.getController().getLoginData().getUuid().toString()));
+        registerPlaceholder(this, "device_os", checkActualPlayer((player, params) -> player.getController().getLoginData().getDeviceInfo().device().getName()));
+        registerPlaceholder(this, "locale", checkActualPlayer((player, params) -> player.getController().getLoginData().getLangCode().toString()));
         registerPlaceholder(this, "date", (player, params) -> LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
         registerPlaceholder(this, "time", (player, params) -> LocalDateTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)));
         registerPlaceholder(this, "datetime", (player, params) -> LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
@@ -154,5 +154,9 @@ public class PlaceholderAPI extends Plugin {
         registerPlaceholder(this, "hour", (player, params) -> LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH")));
         registerPlaceholder(this, "minute", (player, params) -> LocalDateTime.now().format(DateTimeFormatter.ofPattern("mm")));
         registerPlaceholder(this, "second", (player, params) -> LocalDateTime.now().format(DateTimeFormatter.ofPattern("ss")));
+    }
+
+    protected static PlaceholderProcessor checkActualPlayer(PlaceholderProcessor processor) {
+        return (player, params) -> player.isActualPlayer() ? processor.process(player, params) : "";
     }
 }
