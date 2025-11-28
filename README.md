@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly(group = "org.allaymc", name = "papi", version = "0.1.0")
+    compileOnly(group = "org.allaymc", name = "papi", version = "0.1.1")
 }
 ```
 

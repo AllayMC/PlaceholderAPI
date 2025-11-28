@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "org.allaymc"
-version = "0.1.1"
+version = "0.1.1-SNAPSHOT"
 description = "The official placeholder api for Allay"
 
 allay {
@@ -18,7 +18,6 @@ allay {
     plugin {
         entrance = "org.allaymc.papi.PlaceholderAPI"
         name = "PlaceholderAPI"
-        description = "The official placeholder api for Allay"
         authors += "daoge_cmd"
     }
 }
