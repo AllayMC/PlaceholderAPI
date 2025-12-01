@@ -68,7 +68,7 @@ There are a number of built-in placeholders that can be used once papi is instal
 
 Java: 21+
 
-Allay: 0.8.0+
+Allay: 0.17.0+
 
 ## Contributing
 
