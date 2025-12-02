@@ -1,2 +1,2 @@
-rootProject.name = "papi"
+rootProject.name = "PlaceholderAPI"
 
