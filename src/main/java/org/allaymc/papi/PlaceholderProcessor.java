@@ -11,7 +11,7 @@ public interface PlaceholderProcessor {
      * Process the placeholder.
      *
      * @param player the player used to process the placeholder, can be {@code null}
-     * @param params the params used to process the placeholder, can be {@code null}
+     * @param params the params used to process the placeholder or an empty string if no params were used
      *
      * @return the processed placeholder
      */

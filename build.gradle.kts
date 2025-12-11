@@ -9,11 +9,11 @@ plugins {
 }
 
 group = "org.allaymc"
-version = "0.1.2-SNAPSHOT"
+version = "0.1.2"
 description = "The official placeholder api for Allay"
 
 allay {
-    api = "0.17.0"
+    api = "0.18.0"
 
     plugin {
         entrance = "org.allaymc.papi.PlaceholderAPI"
