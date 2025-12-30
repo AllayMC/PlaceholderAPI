@@ -130,6 +130,15 @@ public class PlaceholderAPI extends Plugin {
         registerPlaceholder(this, "z", (player, params) -> String.valueOf(Math.floor(player.getLocation().z())));
         registerPlaceholder(this, "player_name", checkActualPlayer((player, params) -> player.getController().getOriginName()));
         registerPlaceholder(this, "player_display_name", (player, params) -> player.getDisplayName());
+        registerPlaceholder(this, "health", (player, params) -> String.valueOf(player.getHealth()));
+        registerPlaceholder(this, "max_health", (player, params) -> String.valueOf(player.getMaxHealth()));
+        registerPlaceholder(this, "food_level", (player, params) -> String.valueOf(player.getFoodLevel()));
+        registerPlaceholder(this, "food_exhaustion_level", (player, params) -> String.valueOf(player.getFoodExhaustionLevel()));
+        registerPlaceholder(this, "food_saturation_level", (player, params) -> String.valueOf(player.getFoodSaturationLevel()));
+        registerPlaceholder(this, "absorption", (player, params) -> String.valueOf(player.getAbsorption()));
+        registerPlaceholder(this, "air_supply_ticks", (player, params) -> String.valueOf(player.getAirSupplyTicks()));
+        registerPlaceholder(this, "air_supply_max_ticks", (player, params) -> String.valueOf(player.getAirSupplyMaxTicks()));
+        registerPlaceholder(this, "on_fire_ticks", (player, params) -> String.valueOf(player.getOnFireTicks()));
         registerPlaceholder(this, "dimension", (player, params) -> player.getLocation().dimension().getDimensionInfo().toString());
         registerPlaceholder(this, "dimension_id", (player, params) -> String.valueOf(player.getLocation().dimension().getDimensionInfo().dimensionId()));
         registerPlaceholder(this, "ping", checkActualPlayer((player, params) -> String.valueOf(player.getController().getPing())));

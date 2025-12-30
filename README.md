@@ -25,7 +25,7 @@ dependencies {
 ```java
 @EventHandler
 public void onPlayerJoin(PlayerJoinEvent event) {
-    var joinMessage = "{player_name} joined the server! His game mode is {game_type}";
+    var joinMessage = "{player_name} joined the server! His game mode is {game_mode}";
     joinMessage = PlaceholderAPI.getAPI().setPlaceholder(event.getPlayer(), joinMessage);
     event.setJoinMessage(joinMessage);
 }
@@ -39,6 +39,16 @@ There are a number of built-in placeholders that can be used once papi is instal
 - [x] `{y}` y coordinate
 - [x] `{z}` z coordinate
 - [x] `{player_name}` player's name
+- [x] `{player_display_name}` player's display name
+- [x] `{health}` player's health
+- [x] `{max_health}` player's max health
+- [x] `{food_level}` player's food level
+- [x] `{food_exhaustion_level}` player's food exhaustion level
+- [x] `{food_saturation_level}` player's food saturation level
+- [x] `{absorption}` player's absorption amount
+- [x] `{air_supply_ticks}` player's remaining air supply ticks
+- [x] `{air_supply_max_ticks}` player's max air supply ticks
+- [x] `{on_fire_ticks}` player's remaining fire ticks
 - [x] `{dimension}` dimension name
 - [x] `{dimension_id}` dimension id
 - [x] `{ping}` player ping
