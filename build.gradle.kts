@@ -13,7 +13,7 @@ version = "0.1.3-SNAPSHOT"
 description = "The official placeholder api for Allay"
 
 allay {
-    api = "0.18.0"
+    api = "0.19.0"
 
     plugin {
         entrance = "org.allaymc.papi.PlaceholderAPI"
