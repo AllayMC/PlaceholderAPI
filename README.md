@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly(group = "org.allaymc", name = "papi", version = "0.1.1")
+    compileOnly(group = "org.allaymc", name = "papi", version = "0.1.3")
 }
 ```
 
@@ -32,8 +32,6 @@ public void onPlayerJoin(PlayerJoinEvent event) {
 ```
 
 ## Built-in Placeholders
-
-There are a number of built-in placeholders that can be used once papi is installed:
 
 - [x] `{x}` x coordinate
 - [x] `{y}` y coordinate
@@ -49,6 +47,20 @@ There are a number of built-in placeholders that can be used once papi is instal
 - [x] `{air_supply_ticks}` player's remaining air supply ticks
 - [x] `{air_supply_max_ticks}` player's max air supply ticks
 - [x] `{on_fire_ticks}` player's remaining fire ticks
+- [x] `{pitch}` player's pitch
+- [x] `{yaw}` player's yaw
+- [x] `{hand_item}` player's item in hand
+- [x] `{offhand_item}` player's item in offhand
+- [x] `{helmet_item}` player's helmet item
+- [x] `{chestplate_item}` player's chestplate item
+- [x] `{leggings_item}` player's leggings item
+- [x] `{boots_item}` player's boots item
+- [x] `{is_sneaking}` whether player is sneaking
+- [x] `{is_sprinting}` whether player is sprinting
+- [x] `{is_flying}` whether player is flying
+- [x] `{is_swimming}` whether player is swimming
+- [x] `{is_crawling}` whether player is crawling
+- [x] `{is_gliding}` whether player is gliding
 - [x] `{dimension}` dimension name
 - [x] `{dimension_id}` dimension id
 - [x] `{ping}` player ping

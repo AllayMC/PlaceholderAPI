@@ -2,7 +2,9 @@ package org.allaymc.papi;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.allaymc.api.container.ContainerTypes;
 import org.allaymc.api.entity.interfaces.EntityPlayer;
+import org.allaymc.api.item.ItemStack;
 import org.allaymc.api.plugin.Plugin;
 import org.allaymc.api.registry.Registries;
 import org.allaymc.api.server.Server;
@@ -139,6 +141,20 @@ public class PlaceholderAPI extends Plugin {
         registerPlaceholder(this, "air_supply_ticks", (player, params) -> String.valueOf(player.getAirSupplyTicks()));
         registerPlaceholder(this, "air_supply_max_ticks", (player, params) -> String.valueOf(player.getAirSupplyMaxTicks()));
         registerPlaceholder(this, "on_fire_ticks", (player, params) -> String.valueOf(player.getOnFireTicks()));
+        registerPlaceholder(this, "pitch", (player, params) -> String.valueOf(player.getLocation().pitch()));
+        registerPlaceholder(this, "yaw", (player, params) -> String.valueOf(player.getLocation().yaw()));
+        registerPlaceholder(this, "hand_item", (player, params) -> toString(player.getItemInHand()));
+        registerPlaceholder(this, "offhand_item", (player, params) -> toString(player.getContainer(ContainerTypes.OFFHAND).getOffhand()));
+        registerPlaceholder(this, "helmet_item", (player, params) -> toString(player.getContainer(ContainerTypes.ARMOR).getHelmet()));
+        registerPlaceholder(this, "chestplate_item", (player, params) -> toString(player.getContainer(ContainerTypes.ARMOR).getChestplate()));
+        registerPlaceholder(this, "leggings_item", (player, params) -> toString(player.getContainer(ContainerTypes.ARMOR).getLeggings()));
+        registerPlaceholder(this, "boots_item", (player, params) -> toString(player.getContainer(ContainerTypes.ARMOR).getBoots()));
+        registerPlaceholder(this, "is_sneaking", (player, params) -> String.valueOf(player.isSneaking()));
+        registerPlaceholder(this, "is_sprinting", (player, params) -> String.valueOf(player.isSprinting()));
+        registerPlaceholder(this, "is_flying", (player, params) -> String.valueOf(player.isFlying()));
+        registerPlaceholder(this, "is_swimming", (player, params) -> String.valueOf(player.isSwimming()));
+        registerPlaceholder(this, "is_crawling", (player, params) -> String.valueOf(player.isCrawling()));
+        registerPlaceholder(this, "is_gliding", (player, params) -> String.valueOf(player.isGliding()));
         registerPlaceholder(this, "dimension", (player, params) -> player.getLocation().dimension().getDimensionInfo().toString());
         registerPlaceholder(this, "dimension_id", (player, params) -> String.valueOf(player.getLocation().dimension().getDimensionInfo().dimensionId()));
         registerPlaceholder(this, "ping", checkActualPlayer((player, params) -> String.valueOf(player.getController().getPing())));
@@ -167,5 +183,9 @@ public class PlaceholderAPI extends Plugin {
 
     protected static PlaceholderProcessor checkActualPlayer(PlaceholderProcessor processor) {
         return (player, params) -> player.isActualPlayer() ? processor.process(player, params) : "";
+    }
+
+    protected static String toString(ItemStack itemStack) {
+        return itemStack.getItemType().getIdentifier().toString();
     }
 }
