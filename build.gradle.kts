@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "org.allaymc"
-version = "0.1.3-SNAPSHOT"
+version = "0.2.0"
 description = "The official placeholder api for Allay"
 
 allay {
