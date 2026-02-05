@@ -157,6 +157,7 @@ public class PlaceholderAPI extends Plugin {
         registerPlaceholder(this, "is_gliding", (player, params) -> String.valueOf(player.isGliding()));
         registerPlaceholder(this, "dimension", (player, params) -> player.getLocation().dimension().getDimensionInfo().toString());
         registerPlaceholder(this, "dimension_id", (player, params) -> String.valueOf(player.getLocation().dimension().getDimensionInfo().dimensionId()));
+        registerPlaceholder(this, "world_name", (player, params) -> player.getWorld().getWorldData().getDisplayName());
         registerPlaceholder(this, "ping", checkActualPlayer((player, params) -> String.valueOf(player.getController().getPing())));
         registerPlaceholder(this, "mc_version", checkActualPlayer((player, params) -> player.getController().getLoginData().getGameVersion()));
         registerPlaceholder(this, "online", (player, params) -> String.valueOf(Server.getInstance().getPlayerManager().getPlayerCount()));
