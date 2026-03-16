@@ -3,8 +3,8 @@ import com.vanniktech.maven.publish.MavenPublishBaseExtension
 
 plugins {
     id("java-library")
-    id("com.vanniktech.maven.publish") version "0.35.0"
-    id("com.gradleup.shadow") version "9.3.0"
+    id("com.vanniktech.maven.publish") version "0.36.0"
+    id("com.gradleup.shadow") version "9.4.0"
     id("org.allaymc.gradle.plugin") version "0.2.1"
 }
 
@@ -56,9 +56,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.42")
+    compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.44")
 
-    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.42")
+    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.44")
 }
 
 configure<MavenPublishBaseExtension> {
